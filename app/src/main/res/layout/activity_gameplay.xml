@@ -13,6 +13,7 @@
         android:columnCount="0"
         android:padding="18dp"
         android:rowCount="0"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
