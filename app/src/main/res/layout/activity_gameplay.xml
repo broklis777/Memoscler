@@ -2,24 +2,25 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/background_jungle">
 
     <GridLayout
         android:id="@+id/coordinateView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="18dp"
-        android:background="@color/white"
+        android:background="@android:color/transparent"
         android:columnCount="0"
         android:padding="0dp"
         android:rowCount="0"
         android:orientation="horizontal"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-    </GridLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

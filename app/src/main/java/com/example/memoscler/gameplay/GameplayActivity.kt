@@ -2,6 +2,7 @@ package com.example.memoscler.gameplay
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.widget.Button
 import android.widget.GridLayout
 import androidx.activity.viewModels
@@ -31,7 +32,7 @@ class GameplayActivity : AppCompatActivity() {
 
         // Initialize cards in ViewModel
         viewModel.generateCardsAndTheirCoordinates(gridSizeX, gridSizeY)
-        viewModel.pickRandomCards(3)
+        viewModel.pickRandomCards(7)
 
         // Observe the cards and populate the grid layout when they are updated
         viewModel.cards.observe(this) { updatedCards ->
@@ -51,7 +52,7 @@ class GameplayActivity : AppCompatActivity() {
             val buttonWidth = totalWidth / gridSizeX
             val buttonHeight = buttonWidth
 
-            var ind = 1
+            var ind = 0
             for (y in 0 until gridSizeX) {
                 for (x in 0 until gridSizeY) {
                     val cardViewElement = CardViewElement(gridLayout.context)
@@ -60,6 +61,7 @@ class GameplayActivity : AppCompatActivity() {
                         height = buttonHeight
                         columnSpec = GridLayout.spec(x)
                         rowSpec = GridLayout.spec(y)
+
                     }
 
                     cardViewElement.layoutParams = params
