@@ -2,16 +2,9 @@ package com.example.memoscler.gameplay
 
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
-import android.widget.Button
 import android.widget.GridLayout
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.indices
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
 import com.example.memoscler.customviews.cardview.CardViewElement
 import com.example.memoscler.databinding.ActivityGameplayBinding
 import com.example.memoscler.models.CardModel
@@ -38,6 +31,7 @@ class GameplayActivity : AppCompatActivity() {
         viewModel.cards.observe(this) { updatedCards ->
             Log.d("Updated Cards", updatedCards.toString())
             populateGridLayout(binding.coordinateView, updatedCards, gridSizeX, gridSizeY)
+            showCardsForDuration(updatedCards, 3000L)
         }
     }
 
@@ -86,6 +80,24 @@ class GameplayActivity : AppCompatActivity() {
                     ind++
                 }
             }
+        }
+    }
+
+    private fun showCardsForDuration(cards: List<CardModel>, duration: Long) {
+        binding.coordinateView.post {
+            for (index in cards.indices) {
+                val card = cards[index]
+                val cardView = binding.coordinateView.getChildAt(card.index) as? CardViewElement
+                if (card.state) {
+                    cardView?.showBlue()
+                }
+            }
+            binding.coordinateView.postDelayed({
+                for (index in cards.indices) {
+                    val cardView = binding.coordinateView.getChildAt(index) as? CardViewElement
+                    cardView?.hideBlue()
+                }
+            }, duration)
         }
     }
 

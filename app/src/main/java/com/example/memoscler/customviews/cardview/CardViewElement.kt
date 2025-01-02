@@ -5,10 +5,14 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.FrameLayout
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.DiffUtil.ItemCallback
 import com.example.memoscler.databinding.CardViewElementBinding
 import com.example.memoscler.gameplay.GameplayViewModel
 import com.example.memoscler.models.CardModel
+import kotlinx.coroutines.delay
+import kotlin.time.Duration
 
 class CardViewElement @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -43,6 +47,34 @@ class CardViewElement @JvmOverloads constructor(
             binding.flipedWrongRedCard.visibility = VISIBLE
         }
     }
+
+    fun showBlue(){
+        binding.unflipedGreyCard.visibility = GONE
+        binding.revealedBluePositionCard.visibility = VISIBLE
+    }
+
+
+    fun hideBlue() {
+        binding.revealedBluePositionCard.visibility = GONE
+        binding.unflipedGreyCard.visibility = VISIBLE
+    }
+
+    suspend fun showCards(cards: LiveData<MutableList<CardModel>>, duration: Duration){
+        val cardsList = cards.value ?: return
+        delay(1000)
+        for (card in cardsList){
+            if (card.state){
+                showBlue()
+            }
+        }
+        delay(duration)
+        for (card in cardsList){
+            if (card.state){
+                hideBlue()
+            }
+        }
+    }
+
 
 
 }

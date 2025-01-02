@@ -4,7 +4,10 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.memoscler.models.CardModel
+import kotlinx.coroutines.launch
+import kotlin.time.Duration
 
 class GameplayViewModel : ViewModel() {
 
@@ -34,7 +37,7 @@ class GameplayViewModel : ViewModel() {
         Log.d("LIST OF CARDS", _cards.toString())
     }
 
-    fun pickRandomCards(numberOfRandomCards: Int){
+    fun pickRandomCards(numberOfRandomCards: Int) {
         /*for (cardPlace in 0 until numberOfRandomCards){
             var randomCard: Int
             do {
@@ -49,4 +52,10 @@ class GameplayViewModel : ViewModel() {
         }
         _cards.value = shuffledCards
     }
+
+    /*fun revealCardsForDuration(cards: LiveData<MutableList<CardModel>>, duration: Long) {
+        viewModelScope.launch {
+            (activity as? GameplayActivity)?.showCards(cards, duration)
+        }
+    }*/
 }
